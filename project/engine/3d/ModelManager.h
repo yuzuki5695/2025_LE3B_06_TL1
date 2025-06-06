@@ -33,8 +33,6 @@ public:// メンバ関数
 	/// <returns>モデル</returns>
 	Model* FindModel(const std::string& filePath);
 
-private: // メンバ変数	
-    static const std::string kExtension;
 private: // メンバ変数
 	// モデルデータ
 	std::map<std::string, std::unique_ptr<Model>> models;

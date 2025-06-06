@@ -1,6 +1,7 @@
 #include "LevelLoader.h"
 #include<json.hpp>
 #include <fstream>
+#include <ModelManager.h>
 
 const std::string LevelLoader::kDefaultBaseDirectory = "Resources/levels/";
 const std::string LevelLoader::kExtension = ".json";
@@ -62,10 +63,20 @@ void LevelLoader::LoadObjectsRecursive(const nlohmann::json& objectJson, LevelDa
         // 今追加した要素の参照を得る
         LevelData::ObjectData& objectData = levelData.objects.back();
 
+        //if (objectJson.contains("file_name")) {
+        //    // ファイル名
+        //    objectData.fileName = objectJson["file_name"];
+        //}
         if (objectJson.contains("file_name")) {
-            // ファイル名
+            // file_name を取得（例: "uvChecker"）
             objectData.fileName = objectJson["file_name"];
+
+            // .obj を付けたパスでロード（例: "uvChecker.obj"）
+            std::string modelPath = objectData.fileName + ".obj";
+            ModelManager::GetInstance()->LoadModel(modelPath);
         }
+
+
         // トランスフォームのパラメータ読み込み
         const auto& transform = objectJson["transform"]; 	
         // 平行移動

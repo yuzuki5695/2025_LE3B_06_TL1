@@ -45,7 +45,7 @@
         },
         {
             "type": "MESH",
-            "name": "Cube",
+            "name": "uvChecker",
             "transform": {
                 "translation": [
                     0.0,
@@ -63,7 +63,7 @@
                     1.0
                 ]
             },
-            "file_name": "cube",
+            "file_name": "uvChecker",
             "collider": {
                 "type": "Box",
                 "center": [
@@ -77,76 +77,6 @@
                     2.0
                 ]
             }
-        },
-        {
-            "type": "MESH",
-            "name": "ICO球",
-            "transform": {
-                "translation": [
-                    -5.6401824951171875,
-                    0.0,
-                    0.0
-                ],
-                "rotation": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scaling": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "file_name": "cube",
-            "children": [
-                {
-                    "type": "MESH",
-                    "name": "ICO球.001",
-                    "transform": {
-                        "translation": [
-                            -3.079975128173828,
-                            0.0,
-                            3.7432074546813965
-                        ],
-                        "rotation": [
-                            0.0,
-                            -0.0,
-                            0.0
-                        ],
-                        "scaling": [
-                            1.0,
-                            1.0,
-                            1.0
-                        ]
-                    },
-                    "file_name": "cube",
-                    "children": [
-                        {
-                            "type": "MESH",
-                            "name": "ICO球.002",
-                            "transform": {
-                                "translation": [
-                                    14.591888427734375,
-                                    -7.167847633361816,
-                                    -5.897063732147217
-                                ],
-                                "rotation": [
-                                    0.0,
-                                    -0.0,
-                                    0.0
-                                ],
-                                "scaling": [
-                                    1.0,
-                                    1.0,
-                                    1.0
-                                ]
-                            },
-                            "file_name": "cube"
-                        }
-                    ]
-                }
-            ]
         }
     ]
 }

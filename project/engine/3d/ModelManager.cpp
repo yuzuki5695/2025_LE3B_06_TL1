@@ -1,7 +1,5 @@
 #include "ModelManager.h"
 
-const std::string ModelManager::kExtension = ".obj";
-
 ModelManager* ModelManager::instance = nullptr;
 
 ModelManager* ModelManager::GetInstance() {
@@ -27,7 +25,7 @@ void ModelManager::Initialize(DirectXCommon* dxCommon) {
 
 void ModelManager::LoadModel(const std::string& filePath) {
     // 拡張子付きのファイルパスを構築
-    std::string fullPath = filePath + kExtension;
+    std::string fullPath = filePath;
 
 	//  読み込み済みモデルを検索
 	if (models.contains(fullPath)) {
@@ -43,7 +41,7 @@ void ModelManager::LoadModel(const std::string& filePath) {
 
 Model* ModelManager::FindModel(const std::string& filePath) {	
 	// 拡張子付きのファイルパスを構築
-    std::string fullPath = filePath + kExtension;
+    std::string fullPath = filePath;
 
 	//  読み込み済みモデルを検索
 	if (models.contains(fullPath)) {

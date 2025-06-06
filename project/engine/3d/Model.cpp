@@ -164,7 +164,6 @@ ModelDate Model::LoadObjFile(const std::string& directoryPath, const std::string
             std::string mtlPath = directoryPath + "/" + materialFilename;
             std::string mtlDirectory = directoryPath; // objと同じフォルダ
             modelDate.material = LoadMaterialTemplateFile(mtlDirectory, materialFilename); 
-            //  modelDate.material = LoadMaterialTemplateFile(directoryPath, materialFilename);
         }
     }
     // 4. ModelDateを返す
