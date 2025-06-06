@@ -58,10 +58,22 @@ void GamePlayScene::Initialize() {
     grass = Object3d::Create("terrain.obj", Transform({ {1.0f, 1.0f, 1.0f}, {0.0f, 0.0f, 0.0f}, {0.0f, -1.0f, 0.0f} }));
 
 
+    // LevelLoader のインスタンスを生成
+    levelLoader = new LevelLoader();
 
+    // JSONファイルからレベルデータを読み込む
+    levelData = levelLoader->LoadFile("untitled");
 
+    // オブジェクト生成
+    for (auto& objectData : levelData->objects) {
+        Transform transform;
+        transform.scale = objectData.scaling;
+        transform.rotate = objectData.rotation;
+        transform.translate = objectData.translation;
 
-
+        std::unique_ptr<Object3d> obj = Object3d::Create(objectData.fileName, transform);
+        object3ds_.emplace_back(std::move(obj));
+    }
 }
 
 void GamePlayScene::Update() {
@@ -84,7 +96,10 @@ void GamePlayScene::Update() {
 #pragma region 全てのObject3d個々の更新処理
 
     // 更新処理
-   // grass->Update();
+
+    for (auto& object : object3ds_) {
+        object->Update();
+    }
 
 #pragma endregion 全てのObject3d個々の更新処理
 
@@ -103,9 +118,10 @@ void GamePlayScene::Draw() {
 #pragma region 全てのObject3d個々の描画処理
     // 3Dオブジェクトの描画準備。3Dオブジェクトの描画に共通のグラフィックスコマンドを積む
     Object3dCommon::GetInstance()->Commondrawing();
-
-
-    //grass->Draw();
+    	
+    for (auto& object : object3ds_) {
+        object->Draw();
+    }
 
     // パーティクルの描画準備。パーティクルの描画に共通のグラフィックスコマンドを積む 
     ParticleCommon::GetInstance()->Commondrawing();

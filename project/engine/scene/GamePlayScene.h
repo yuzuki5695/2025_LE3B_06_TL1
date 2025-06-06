@@ -5,6 +5,7 @@
 #include<SoundPlayer.h>
 #include<BaseScene.h>
 #include <ParticleEmitter.h>
+#include<LevelLoader.h>
 
 // ゲームプレイシーン
 class GamePlayScene : public BaseScene
@@ -36,5 +37,24 @@ private: // メンバ変数
     SoundData soundData;
     // 音声プレイフラグ
     uint32_t soundfige;
+    
+
+
+    // ポインタ
+    // レベルロード
+	LevelLoader* levelLoader = nullptr;
+
+    // レベルデータ格納用インスタンスを生成
+	LevelData* levelData = nullptr;
+	// モデルデータコンテナ
+	std::map<std::string, Model*> models;
+
+    std::vector<std::unique_ptr<Object3d>> object3ds_;
+
+
+	//// ワールド行列
+	//std::vector<WorldTransform*> worldTransforms;
+
+	//ViewProjection viewProjection;
 
 };
