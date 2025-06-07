@@ -30,7 +30,9 @@ void Object3d::Initialize(Object3dCommon* object3dCommon) {
     SpotlightGenerate();
 }
 
-void Object3d::Update() {
+void Object3d::Update() { 
+    //ライトのオンオフ
+    model->SetEnableLighting(enableLighting);
     // ワールド行列の作成
     Matrix4x4 worldMatrix = MakeAftineMatrix(transform_.scale, transform_.rotate, transform_.translate);
     // ワールド・ビュー・プロジェクション行列
@@ -140,6 +142,7 @@ void Object3d::SpotlightGenerate() {
 void Object3d::SetModel(const std::string& filePath) {
     // モデルを検索してセットする
     model = ModelManager::GetInstance()->FindModel(filePath);
+    assert(model != nullptr);  // モデルがない場合はここで止めると安全
 }
 
 std::unique_ptr<Object3d> Object3d::Create(std::string filePath, Transform transform) {
@@ -147,10 +150,10 @@ std::unique_ptr<Object3d> Object3d::Create(std::string filePath, Transform trans
     // 初期化
     object3d->Initialize(Object3dCommon::GetInstance());
     // モデルを検索してセットする
-    object3d->model = ModelManager::GetInstance()->FindModel(filePath);
+    object3d->model = ModelManager::GetInstance()->FindModel(filePath); 
+    assert(object3d->model != nullptr);  // モデルがない場合はここで止めると安全
     // 座標をセット
-    object3d->transform_ = transform;
-  
+    object3d->transform_ = transform; 
     return object3d;
 }
 

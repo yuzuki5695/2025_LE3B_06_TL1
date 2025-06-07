@@ -65,7 +65,7 @@ void Model::MaterialGenerate() {
     // マテリアルデータの初期値を書き込む
     materialData->color = { 1.0f, 1.0f, 1.0f, 1.0f };
     // SpriteはLightingしないでfalseを設定する
-    materialData->endbleLighting = true;
+	materialData->enableLighting = false; // デフォルトでライトOFF
     // 単位行列を書き込んでおく
     materialData->uvTransform = MakeIdentity4x4();
     // 光沢度を書き込む

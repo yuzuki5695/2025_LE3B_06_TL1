@@ -19,7 +19,7 @@ void GamePlayScene::Finalize() {
 void GamePlayScene::Initialize() {
     // カメラの初期化
     camera = std::make_unique<Camera>();
-    camera->SetTranslate(Vector3(0.0f, 0.0f, -30.0f));
+    camera->SetTranslate(Vector3(0.0f, 0.0f, -100.0f));
     camera->SetRotate(Vector3(0.0f, 0.0f, 0.0f));
     Object3dCommon::GetInstance()->SetDefaultCamera(camera.get());
     ParticleCommon::GetInstance()->SetDefaultCamera(camera.get());
@@ -46,14 +46,15 @@ void GamePlayScene::Initialize() {
 
     // オブジェクト作成
     object3d = Object3d::Create("monsterBallUV.obj", Transform({ {1.0f, 1.0f, 1.0f}, {0.0f, -1.6f, 0.0f}, {0.0f, 0.0f, 0.0f} }));
+    object3d->SetLighting(true);
     grass = Object3d::Create("terrain.obj", Transform({ {1.0f, 1.0f, 1.0f}, {0.0f, 0.0f, 0.0f}, {0.0f, -1.0f, 0.0f} }));
-
 
     // LevelLoader のインスタンスを生成
     levelLoader = new LevelLoader();
 
     // JSONファイルからレベルデータを読み込む
-    levelData = levelLoader->LoadFile("untitled");
+    levelData = levelLoader->LoadFile("untitled"); 
+    ModelManager::GetInstance()->LoadModel("uvChecker.obj");    
 
     // レベルデータから読み込み、オブジェクト生成
     for (auto& objData : levelData->objects) {
@@ -65,13 +66,8 @@ void GamePlayScene::Initialize() {
         // fileName に .obj を追加して検索用文字列を作成
         std::string modelName = objData.fileName + ".obj";
 
-        // モデル検索
-        Model* model = ModelManager::GetInstance()->FindModel(modelName);
-        assert(model != nullptr);  // モデルがない場合はここで止めると安全
-
-        // モデル名ではなく、file_name（拡張子なし）を指定
-        auto obj = Object3d::Create(objData.fileName, tr);
-        obj->SetCamera(camera.get());
+        // オブジェクトを生成して、オブジェクトコンテナに渡す
+        auto obj = Object3d::Create(modelName, tr);
         object3ds_.push_back(std::move(obj));
     }
 }
@@ -118,6 +114,8 @@ ImGui::End();
 
     // 更新処理
 
+    object3d->Update();
+
     for (auto& object : object3ds_) {
         object->Update();
     }
@@ -140,6 +138,9 @@ void GamePlayScene::Draw() {
     // 3Dオブジェクトの描画準備。3Dオブジェクトの描画に共通のグラフィックスコマンドを積む
     Object3dCommon::GetInstance()->Commondrawing();
     	
+      
+  //  object3d->Draw();
+
     for (auto& object : object3ds_) {
         object->Draw();
     }

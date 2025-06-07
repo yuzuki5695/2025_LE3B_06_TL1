@@ -45,7 +45,7 @@
         },
         {
             "type": "MESH",
-            "name": "uvChecker",
+            "name": "Cube",
             "transform": {
                 "translation": [
                     0.0,
@@ -77,6 +77,76 @@
                     2.0
                 ]
             }
+        },
+        {
+            "type": "MESH",
+            "name": "ICO球",
+            "transform": {
+                "translation": [
+                    -6.947026252746582,
+                    0.0,
+                    3.55963134765625
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "uvChecker",
+            "children": [
+                {
+                    "type": "MESH",
+                    "name": "ICO球.001",
+                    "transform": {
+                        "translation": [
+                            8.180444717407227,
+                            -4.74149751663208,
+                            2.966010570526123
+                        ],
+                        "rotation": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scaling": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "file_name": "uvChecker",
+                    "children": [
+                        {
+                            "type": "MESH",
+                            "name": "ICO球.002",
+                            "transform": {
+                                "translation": [
+                                    4.283413887023926,
+                                    -6.11521577835083,
+                                    -6.525641918182373
+                                ],
+                                "rotation": [
+                                    0.0,
+                                    -0.0,
+                                    0.0
+                                ],
+                                "scaling": [
+                                    1.0,
+                                    1.0,
+                                    1.0
+                                ]
+                            },
+                            "file_name": "uvChecker"
+                        }
+                    ]
+                }
+            ]
         }
     ]
 }

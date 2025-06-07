@@ -59,8 +59,11 @@ public: // メンバ関数
 	// 3Dobject作成関数
 	static std::unique_ptr<Object3d> Create(std::string filePath, Transform transform);
 
-
+	// imguiの処理
 	void DebugUpdata(const std::string& name);
+	
+	//ライトのオンオフ
+	void SetLighting(bool enable) { enableLighting = enable; }
 
 private:
 	// リソース
@@ -92,8 +95,10 @@ private:
 	CameraForGPU* cameraForGPUData = nullptr;
 	PointLight* pointLightData = nullptr;
 	SpotLight* spotLightData = nullptr;
-
+	// objectのトランスフォーム
 	Transform transform_;
+	// ライト
+	bool enableLighting = false;
 public:
 	// getter
 	const Transform& GetTransform() const { return transform_; }
