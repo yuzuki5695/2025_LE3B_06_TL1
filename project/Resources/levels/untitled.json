@@ -64,6 +64,7 @@
                 ]
             },
             "file_name": "uvChecker",
+            "disabled": true,
             "collider": {
                 "type": "Box",
                 "center": [
@@ -99,6 +100,7 @@
                 ]
             },
             "file_name": "uvChecker",
+            "disabled": true,
             "children": [
                 {
                     "type": "MESH",
@@ -121,6 +123,7 @@
                         ]
                     },
                     "file_name": "uvChecker",
+                    "disabled": false,
                     "children": [
                         {
                             "type": "MESH",
@@ -142,7 +145,8 @@
                                     1.0
                                 ]
                             },
-                            "file_name": "uvChecker"
+                            "file_name": "uvChecker",
+                            "disabled": true
                         }
                     ]
                 }

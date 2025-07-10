@@ -50,47 +50,59 @@ LevelData* LevelLoader::LoadFile(const std::string& fileName) {
 
 void LevelLoader::LoadObjectsRecursive(const nlohmann::json& objectJson, LevelData& levelData) {
     assert(objectJson.contains("type"));
-    	
-    // 種別を取得
-    std::string type = objectJson["type"].get<std::string>();
-    
-    // 種類ごとの処理
- 	
-    // MESH
-    if (type == "MESH") { 			
-        // 要素追加
-        levelData.objects.emplace_back(LevelData::ObjectData{});	
-        // 今追加した要素の参照を得る
-        LevelData::ObjectData& objectData = levelData.objects.back();
 
-        //if (objectJson.contains("file_name")) {
-        //    // ファイル名
-        //    objectData.fileName = objectJson["file_name"];
-        //}
-        if (objectJson.contains("file_name")) {
-            // file_name を取得（例: "uvChecker"）
-            objectData.fileName = objectJson["file_name"];
-
-            // .obj を付けたパスでロード（例: "uvChecker.obj"）
-            std::string modelPath = objectData.fileName + ".obj";
-            ModelManager::GetInstance()->LoadModel(modelPath);
+    if(objectJson.contains("disabled")) {
+        // 有効無効オプション
+        bool disabled = objectJson["disabled"].get<bool>();
+        if (disabled) {// 配置しない(スキっプ)
+            return;
         }
+    }
+        
+    bool isDisabled = objectJson.contains("disabled") && objectJson["disabled"].get<bool>();
+
+    if (!isDisabled) {
+        // 種別を取得
+        std::string type = objectJson["type"].get<std::string>();
+
+        // 種類ごとの処理
+
+        // MESH
+        if (type == "MESH") {
+            // 要素追加
+            levelData.objects.emplace_back(LevelData::ObjectData{});
+            // 今追加した要素の参照を得る
+            LevelData::ObjectData& objectData = levelData.objects.back();
+
+            //if (objectJson.contains("file_name")) {
+            //    // ファイル名
+            //    objectData.fileName = objectJson["file_name"];
+            //}
+            if (objectJson.contains("file_name")) {
+                // file_name を取得（例: "uvChecker"）
+                objectData.fileName = objectJson["file_name"];
+
+                // .obj を付けたパスでロード（例: "uvChecker.obj"）
+                std::string modelPath = objectData.fileName + ".obj";
+                ModelManager::GetInstance()->LoadModel(modelPath);
+            }
 
 
-        // トランスフォームのパラメータ読み込み
-        const auto& transform = objectJson["transform"]; 	
-        // 平行移動
-        objectData.translation.x = (float)transform["translation"][0];
-        objectData.translation.y = (float)transform["translation"][2];
-        objectData.translation.z = (float)transform["translation"][1];
-       // 回転角
-        objectData.rotation.x = -(float)transform["rotation"][0];
-        objectData.rotation.y = -(float)transform["rotation"][2];
-        objectData.rotation.z = -(float)transform["rotation"][1];
-        // スケーリング
-        objectData.scaling.x = (float)transform["scaling"][0];
-        objectData.scaling.y = (float)transform["scaling"][2];
-        objectData.scaling.z = (float)transform["scaling"][1];
+            // トランスフォームのパラメータ読み込み
+            const auto& transform = objectJson["transform"];
+            // 平行移動
+            objectData.translation.x = (float)transform["translation"][0];
+            objectData.translation.y = (float)transform["translation"][2];
+            objectData.translation.z = (float)transform["translation"][1];
+            // 回転角
+            objectData.rotation.x = -(float)transform["rotation"][0];
+            objectData.rotation.y = -(float)transform["rotation"][2];
+            objectData.rotation.z = -(float)transform["rotation"][1];
+            // スケーリング
+            objectData.scaling.x = (float)transform["scaling"][0];
+            objectData.scaling.y = (float)transform["scaling"][2];
+            objectData.scaling.z = (float)transform["scaling"][1];
+        }
     }
 
     // 子ノードがあれば再帰呼び出し
