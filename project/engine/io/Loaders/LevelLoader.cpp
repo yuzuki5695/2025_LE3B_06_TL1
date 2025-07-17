@@ -50,15 +50,7 @@ LevelData* LevelLoader::LoadFile(const std::string& fileName) {
 
 void LevelLoader::LoadObjectsRecursive(const nlohmann::json& objectJson, LevelData& levelData) {
     assert(objectJson.contains("type"));
-
-    if(objectJson.contains("disabled")) {
-        // 有効無効オプション
-        bool disabled = objectJson["disabled"].get<bool>();
-        if (disabled) {// 配置しない(スキっプ)
-            return;
-        }
-    }
-        
+    
     bool isDisabled = objectJson.contains("disabled") && objectJson["disabled"].get<bool>();
 
     if (!isDisabled) {
@@ -74,10 +66,6 @@ void LevelLoader::LoadObjectsRecursive(const nlohmann::json& objectJson, LevelDa
             // 今追加した要素の参照を得る
             LevelData::ObjectData& objectData = levelData.objects.back();
 
-            //if (objectJson.contains("file_name")) {
-            //    // ファイル名
-            //    objectData.fileName = objectJson["file_name"];
-            //}
             if (objectJson.contains("file_name")) {
                 // file_name を取得（例: "uvChecker"）
                 objectData.fileName = objectJson["file_name"];
