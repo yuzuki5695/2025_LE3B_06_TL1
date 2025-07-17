@@ -90,6 +90,20 @@ void LevelLoader::LoadObjectsRecursive(const nlohmann::json& objectJson, LevelDa
             objectData.scaling.x = (float)transform["scaling"][0];
             objectData.scaling.y = (float)transform["scaling"][2];
             objectData.scaling.z = (float)transform["scaling"][1];
+        } else if (type.compare("PlayerSpawn") == 0) {
+            // playersに要素を1つ追加する
+            levelData.players.emplace_back(PlayerSpawnData{});
+            PlayerSpawnData& playerData = levelData.players.back(); 
+            // トランスフォームのパラメータ読み込み
+            const auto& transform = objectJson["transform"];
+            // 平行移動の数値を書き込む
+            playerData.translation.x = (float)transform["translation"][0];
+            playerData.translation.y = (float)transform["translation"][2]; // YとZ入れ替え
+            playerData.translation.z = (float)transform["translation"][1];
+            // 回転角の数値をラジアンで書き込む
+            playerData.rotation.x = -(float)transform["rotation"][0];
+            playerData.rotation.y = -(float)transform["rotation"][2];
+            playerData.rotation.z = -(float)transform["rotation"][1];
         }
     }
 
