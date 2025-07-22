@@ -90,10 +90,10 @@ void LevelLoader::LoadObjectsRecursive(const nlohmann::json& objectJson, LevelDa
             objectData.scaling.x = (float)transform["scaling"][0];
             objectData.scaling.y = (float)transform["scaling"][2];
             objectData.scaling.z = (float)transform["scaling"][1];
-        } else if (type.compare("PlayerSpawn") == 0) {
+        } else if (type.compare("PlayerSpawn") == 0) {                        // 自キャラ発生ポイント
             // playersに要素を1つ追加する
             levelData.players.emplace_back(PlayerSpawnData{});
-            PlayerSpawnData& playerData = levelData.players.back(); 
+            PlayerSpawnData& playerData = levelData.players.back();
             // トランスフォームのパラメータ読み込み
             const auto& transform = objectJson["transform"];
             // 平行移動の数値を書き込む
@@ -104,6 +104,22 @@ void LevelLoader::LoadObjectsRecursive(const nlohmann::json& objectJson, LevelDa
             playerData.rotation.x = -(float)transform["rotation"][0];
             playerData.rotation.y = -(float)transform["rotation"][2];
             playerData.rotation.z = -(float)transform["rotation"][1];
+        } else if (type.compare("EnemySpawn") == 0) {                        // 自キャラ発生ポイント
+            // playersに要素を1つ追加する
+            levelData.enemies.emplace_back(EnemySpawnData{});
+            EnemySpawnData& enemyData = levelData.enemies.back();
+            // トランスフォームのパラメータ読み込み
+            const auto& transform = objectJson["transform"];
+            // 平行移動の数値を書き込む
+            enemyData.translation.x = (float)transform["translation"][0];
+            enemyData.translation.y = (float)transform["translation"][2]; // YとZ入れ替え
+            enemyData.translation.z = (float)transform["translation"][1];
+            // 回転角の数値をラジアンで書き込む
+            enemyData.rotation.x = -(float)transform["rotation"][0];
+            enemyData.rotation.y = -(float)transform["rotation"][2];
+            enemyData.rotation.z = -(float)transform["rotation"][1];
+			// ファイル名を取得
+			enemyData.fileName = objectJson["file_name"].get<std::string>();
         }
     }
 

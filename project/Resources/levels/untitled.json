@@ -2,6 +2,42 @@
     "name": "scene",
     "objects": [
         {
+            "type": "MESH",
+            "name": "Cube",
+            "transform": {
+                "translation": [
+                    -3.2815277576446533,
+                    -4.688571453094482,
+                    2.2234582901000977
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "uvChecker",
+            "disabled": false,
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
             "type": "LIGHT",
             "name": "Light",
             "transform": {
@@ -44,122 +80,13 @@
             }
         },
         {
-            "type": "MESH",
-            "name": "Cube",
-            "transform": {
-                "translation": [
-                    0.0,
-                    13.242053031921387,
-                    0.0
-                ],
-                "rotation": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scaling": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "file_name": "uvChecker",
-            "disabled": false,
-            "collider": {
-                "type": "Box",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "ICO球",
-            "transform": {
-                "translation": [
-                    -6.947026252746582,
-                    0.0,
-                    3.55963134765625
-                ],
-                "rotation": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scaling": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "file_name": "uvChecker",
-            "disabled": true,
-            "children": [
-                {
-                    "type": "MESH",
-                    "name": "ICO球.001",
-                    "transform": {
-                        "translation": [
-                            8.180444717407227,
-                            -4.74149751663208,
-                            2.966010570526123
-                        ],
-                        "rotation": [
-                            0.0,
-                            -0.0,
-                            0.0
-                        ],
-                        "scaling": [
-                            1.0,
-                            1.0,
-                            1.0
-                        ]
-                    },
-                    "file_name": "uvChecker",
-                    "disabled": true,
-                    "children": [
-                        {
-                            "type": "MESH",
-                            "name": "ICO球.002",
-                            "transform": {
-                                "translation": [
-                                    4.283413887023926,
-                                    -6.11521577835083,
-                                    -6.525641918182373
-                                ],
-                                "rotation": [
-                                    0.0,
-                                    -0.0,
-                                    0.0
-                                ],
-                                "scaling": [
-                                    1.0,
-                                    1.0,
-                                    1.0
-                                ]
-                            },
-                            "file_name": "uvChecker",
-                            "disabled": false
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "type": "PrototypePlayerSpawn",
+            "type": "PlayerSpawn",
             "name": "PlayerSpawn",
             "transform": {
                 "translation": [
-                    13.196423530578613,
-                    0.0,
-                    0.0
+                    -0.0315869078040123,
+                    0.17832502722740173,
+                    0.20267556607723236
                 ],
                 "rotation": [
                     0.0,
@@ -173,6 +100,42 @@
                 ]
             },
             "file_name": "Player",
+            "disabled": false,
+            "collider": {
+                "type": "BOX",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    2.0,
+                    2.0,
+                    2.0
+                ]
+            }
+        },
+        {
+            "type": "EnemySpawn",
+            "name": "EnemySpawn",
+            "transform": {
+                "translation": [
+                    0.39412519335746765,
+                    5.137963771820068,
+                    3.444193124771118
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "Enemy",
             "disabled": false,
             "collider": {
                 "type": "BOX",
