@@ -28,6 +28,10 @@ public: // メンバ関数
 	static MaterialDate LoadMaterialTemplateFile(const std::string& directoryPath, const std::string& filename);
 	// .objファイルの読み取り
 	static ModelDate LoadObjFile(const std::string& directoryPath, const std::string& filename);
+	
+	//ライトのオンオフ
+	void SetEnableLighting(bool enable) { materialData->enableLighting = enable ? 1 : 0; }
+
 private:
 	// 頂点データ作成
 	void VertexDatacreation();

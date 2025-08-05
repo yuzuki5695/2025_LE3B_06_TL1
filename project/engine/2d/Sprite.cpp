@@ -59,7 +59,7 @@ void Sprite::MaterialGenerate() {
 	// 今回は白
 	materialData->color = { 1.0f, 1.0f, 1.0f, 1.0f };
 	// SpriteはLightingしないでfalseを設定する
-	materialData->endbleLighting = false;
+	materialData->enableLighting = false;
 	// 単位行列を書き込んでおく
 	materialData->uvTransform = MakeIdentity4x4();
 }

@@ -63,7 +63,7 @@
                     1.0
                 ]
             },
-            "file_name": "cube",
+            "file_name": "uvChecker",
             "collider": {
                 "type": "Box",
                 "center": [
@@ -83,9 +83,9 @@
             "name": "ICO球",
             "transform": {
                 "translation": [
-                    -5.6401824951171875,
+                    -6.947026252746582,
                     0.0,
-                    0.0
+                    3.55963134765625
                 ],
                 "rotation": [
                     0.0,
@@ -98,16 +98,16 @@
                     1.0
                 ]
             },
-            "file_name": "cube",
+            "file_name": "uvChecker",
             "children": [
                 {
                     "type": "MESH",
                     "name": "ICO球.001",
                     "transform": {
                         "translation": [
-                            -3.079975128173828,
-                            0.0,
-                            3.7432074546813965
+                            8.180444717407227,
+                            -4.74149751663208,
+                            2.966010570526123
                         ],
                         "rotation": [
                             0.0,
@@ -120,16 +120,16 @@
                             1.0
                         ]
                     },
-                    "file_name": "cube",
+                    "file_name": "uvChecker",
                     "children": [
                         {
                             "type": "MESH",
                             "name": "ICO球.002",
                             "transform": {
                                 "translation": [
-                                    14.591888427734375,
-                                    -7.167847633361816,
-                                    -5.897063732147217
+                                    4.283413887023926,
+                                    -6.11521577835083,
+                                    -6.525641918182373
                                 ],
                                 "rotation": [
                                     0.0,
@@ -142,7 +142,7 @@
                                     1.0
                                 ]
                             },
-                            "file_name": "cube"
+                            "file_name": "uvChecker"
                         }
                     ]
                 }

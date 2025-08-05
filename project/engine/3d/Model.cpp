@@ -65,7 +65,7 @@ void Model::MaterialGenerate() {
     // マテリアルデータの初期値を書き込む
     materialData->color = { 1.0f, 1.0f, 1.0f, 1.0f };
     // SpriteはLightingしないでfalseを設定する
-    materialData->endbleLighting = true;
+	materialData->enableLighting = false; // デフォルトでライトOFF
     // 単位行列を書き込んでおく
     materialData->uvTransform = MakeIdentity4x4();
     // 光沢度を書き込む
@@ -161,7 +161,9 @@ ModelDate Model::LoadObjFile(const std::string& directoryPath, const std::string
             std::string materialFilename;
             s >> materialFilename;
             // 基本的にobjファイルと同一階層にmtlは存在させるので、ディレクトリ名とファイル名を渡す
-            modelDate.material = LoadMaterialTemplateFile(directoryPath, materialFilename);
+            std::string mtlPath = directoryPath + "/" + materialFilename;
+            std::string mtlDirectory = directoryPath; // objと同じフォルダ
+            modelDate.material = LoadMaterialTemplateFile(mtlDirectory, materialFilename); 
         }
     }
     // 4. ModelDateを返す

@@ -5,6 +5,7 @@
 #include<SoundPlayer.h>
 #include<BaseScene.h>
 #include <ParticleEmitter.h>
+#include<LevelLoader.h>
 
 // ゲームプレイシーン
 class GamePlayScene : public BaseScene
@@ -22,9 +23,6 @@ private: // メンバ変数
     // オブジェクトデータ
     // camera 
     std::unique_ptr <Camera> camera = nullptr;
-    //// カメラの現在の位置と回転を取得
-    Vector3 Cameraposition;
-    Vector3 Camerarotation;
     // Sprite
     std::unique_ptr<Sprite> sprite = nullptr;
     // Object3d
@@ -37,4 +35,12 @@ private: // メンバ変数
     // 音声プレイフラグ
     uint32_t soundfige;
 
+    // ポインタ
+    // レベルロード
+	LevelLoader* levelLoader = nullptr;
+
+    // レベルデータ格納用インスタンスを生成
+    LevelData* levelData = nullptr;
+    // オブジェクトコンテナ
+    std::vector<std::unique_ptr<Object3d>> object3ds_;
 };

@@ -28,7 +28,7 @@ public: // メンバ関数
 	/// <summary>
 	/// テクスチャファイルの読み込み
 	/// </summary>	/// <param name="filePath"テクスチャファイルのパス></param>
-	void LoadTexture(const std::string& filePath);
+	void LoadTexture(const std::string& fileName);
 
 	// メタデータを取得
 	const DirectX::TexMetadata& GetMetaData(const std::string& filepath);
@@ -42,7 +42,6 @@ public: // メンバ関数
 		// textures マップにファイルパスが存在するか確認
 		return textureDatas.find(filepath) != textureDatas.end();
 	}
-
 private: // メンバ変数
 	// テクスチャ1枚分のデータ
 	struct TextureData {
