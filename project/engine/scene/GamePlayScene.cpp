@@ -53,7 +53,7 @@ void GamePlayScene::Initialize() {
     levelLoader = new LevelLoader();
 
     // JSONファイルからレベルデータを読み込む
-    levelData = levelLoader->LoadFile("untitled"); 
+    levelData = levelLoader->LoadFile("untitled");  
     ModelManager::GetInstance()->LoadModel("uvChecker.obj");    
 
     // レベルデータから読み込み、オブジェクト生成
