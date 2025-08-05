@@ -42,5 +42,6 @@ private: // メンバ変数
     // レベルデータ格納用インスタンスを生成
     LevelData* levelData = nullptr;
     // オブジェクトコンテナ
-    std::vector<std::unique_ptr<Object3d>> object3ds_;
+    std::vector<std::unique_ptr<Object3d>> object3ds_; 
+    std::unique_ptr<Object3d> player_;
 };

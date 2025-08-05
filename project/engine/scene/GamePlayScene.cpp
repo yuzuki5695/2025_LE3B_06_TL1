@@ -31,9 +31,9 @@ void GamePlayScene::Initialize() {
     // .objファイルからモデルを読み込む
     ModelManager::GetInstance()->LoadModel("plane.obj");
     ModelManager::GetInstance()->LoadModel("monsterBallUV.obj");
-    ModelManager::GetInstance()->LoadModel("terrain.obj");    
-    
-    ModelManager::GetInstance()->LoadModel("uvChecker.obj");    
+    ModelManager::GetInstance()->LoadModel("terrain.obj");
+
+    ModelManager::GetInstance()->LoadModel("uvChecker.obj");
 
     // 音声ファイルを追加
     soundData = SoundLoader::GetInstance()->SoundLoadWave("Resources/Alarm01.wav");
@@ -53,8 +53,10 @@ void GamePlayScene::Initialize() {
     levelLoader = new LevelLoader();
 
     // JSONファイルからレベルデータを読み込む
-    levelData = levelLoader->LoadFile("untitled");  
-    ModelManager::GetInstance()->LoadModel("uvChecker.obj");    
+    levelData = levelLoader->LoadFile("untitled");
+    ModelManager::GetInstance()->LoadModel("uvChecker.obj");
+    ModelManager::GetInstance()->LoadModel("Player.obj");
+    ModelManager::GetInstance()->LoadModel("Enemy.obj");
 
     // レベルデータから読み込み、オブジェクト生成
     for (auto& objData : levelData->objects) {
@@ -69,6 +71,29 @@ void GamePlayScene::Initialize() {
         // オブジェクトを生成して、オブジェクトコンテナに渡す
         auto obj = Object3d::Create(modelName, tr);
         object3ds_.push_back(std::move(obj));
+    }
+
+    // 自キャラの生成
+    player_ = Object3d::Create("Player.obj", Transform({ {1.0f, 1.0f, 1.0f}, {0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f} }));
+
+    // プレイヤー配置データからプレイヤーを配置
+    if (!levelData->players.empty()) {
+        auto& playerData = levelData->players[0];
+        player_->SetTranslate(playerData.translation);
+        player_->SetRotate(playerData.rotation);
+    }
+
+    // 敵キャラをすべて配置
+    for (const auto& enemyData : levelData->enemies) {
+        // .objモデルのロードとObject3d作成
+        auto enemy = Object3d::Create("Enemy.obj", Transform({ {1.0f, 1.0f, 1.0f},enemyData.translation,enemyData.rotation }));
+
+        // 位置・回転を再確認のために明示的に設定
+        enemy->SetTranslate(enemyData.translation);
+        enemy->SetRotate(enemyData.rotation);
+
+        // オブジェクトコンテナに追加
+        object3ds_.push_back(std::move(enemy));
     }
 }
 
@@ -120,6 +145,8 @@ ImGui::End();
         object->Update();
     }
 
+    player_->Update();
+
 #pragma endregion 全てのObject3d個々の更新処理
 
 #pragma region 全てのSprite個々の更新処理
@@ -144,6 +171,9 @@ void GamePlayScene::Draw() {
     for (auto& object : object3ds_) {
         object->Draw();
     }
+
+
+    player_->Draw();
 
     // パーティクルの描画準備。パーティクルの描画に共通のグラフィックスコマンドを積む 
     ParticleCommon::GetInstance()->Commondrawing();

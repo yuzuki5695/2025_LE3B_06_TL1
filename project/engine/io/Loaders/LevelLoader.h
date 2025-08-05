@@ -4,6 +4,23 @@
 #include <Vector3.h>
 #include<json.hpp>
 
+// 自キャラの生成データ
+struct PlayerSpawnData {	
+	// 位置移動
+	Vector3 translation;
+	// 回転角
+	Vector3 rotation;
+};	
+
+struct EnemySpawnData {
+	// ファイル名
+	std::string fileName;
+	// 平行移動
+	Vector3 translation;
+	// 回転角
+	Vector3 rotation;
+};
+
 // レベルデータ
 struct LevelData {
 	// オブジェクト1個分のデータ
@@ -16,6 +33,10 @@ struct LevelData {
 	};
 	// オブジェクトのコンテナ
 	std::vector<ObjectData> objects;
+	// 自キャラ配列
+	std::vector<PlayerSpawnData> players;	
+	// 自キャラ配列
+	std::vector<EnemySpawnData> enemies;
 };
 
 class LevelLoader
